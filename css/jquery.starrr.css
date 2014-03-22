@@ -4,5 +4,5 @@
     font-size: 16px;
     padding: 0 1px;
     cursor: pointer; }
-    .starrr i.icon-star-empty, .starrr i.icon-star {
+    .starrr i.fa-star-o, .starrr i.fa-star {
       color: #FFD119; }

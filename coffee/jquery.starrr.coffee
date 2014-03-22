@@ -29,7 +29,7 @@
       @$el.on 'starrr:change', @options.change
 
     createStars: ->
-      @$el.append("""<i class='icon-star-empty'></i>""") for [1..@options.numStars]
+      @$el.append("""<i class='fa fa-star-o'></i>""") for [1..@options.numStars]
 
     setRating: (rating) ->
       rating = undefined if @options.rating == rating
@@ -42,14 +42,14 @@
 
       if rating
         for i in [0..rating - 1]
-          @$el.find('i').eq(i).removeClass('icon-star-empty').addClass('icon-star')
+          @$el.find('i').eq(i).removeClass('fa-star-o').addClass('fa-star')
 
       if rating && rating < 5
         for i in [rating..4]
-          @$el.find('i').eq(i).removeClass('icon-star').addClass('icon-star-empty')
+          @$el.find('i').eq(i).removeClass('fa-star').addClass('fa-star-o')
 
       if !rating
-        @$el.find('i').removeClass('icon-star').addClass('icon-star-empty')
+        @$el.find('i').removeClass('fa-star').addClass('fa-star-o')
 
   # Define the plugin
   $.fn.extend starrr: (option, args...) ->

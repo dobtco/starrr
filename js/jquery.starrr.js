@@ -2,7 +2,6 @@ var __slice = [].slice;
 
 (function($, window) {
   var Starrr;
-
   Starrr = (function() {
     Starrr.prototype.defaults = {
       rating: void 0,
@@ -11,9 +10,7 @@ var __slice = [].slice;
     };
 
     function Starrr($el, options) {
-      var i, _, _ref,
-        _this = this;
-
+      var i, _, _ref;
       this.options = $.extend({}, this.defaults, options);
       this.$el = $el;
       _ref = this.defaults;
@@ -25,24 +22,29 @@ var __slice = [].slice;
       }
       this.createStars();
       this.syncRating();
-      this.$el.on('mouseover.starrr', 'i', function(e) {
-        return _this.syncRating(_this.$el.find('i').index(e.currentTarget) + 1);
-      });
-      this.$el.on('mouseout.starrr', function() {
-        return _this.syncRating();
-      });
-      this.$el.on('click.starrr', 'i', function(e) {
-        return _this.setRating(_this.$el.find('i').index(e.currentTarget) + 1);
-      });
+      this.$el.on('mouseover.starrr', 'i', (function(_this) {
+        return function(e) {
+          return _this.syncRating(_this.$el.find('i').index(e.currentTarget) + 1);
+        };
+      })(this));
+      this.$el.on('mouseout.starrr', (function(_this) {
+        return function() {
+          return _this.syncRating();
+        };
+      })(this));
+      this.$el.on('click.starrr', 'i', (function(_this) {
+        return function(e) {
+          return _this.setRating(_this.$el.find('i').index(e.currentTarget) + 1);
+        };
+      })(this));
       this.$el.on('starrr:change', this.options.change);
     }
 
     Starrr.prototype.createStars = function() {
       var _i, _ref, _results;
-
       _results = [];
       for (_i = 1, _ref = this.options.numStars; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--) {
-        _results.push(this.$el.append("<i class='icon-star-empty'></i>"));
+        _results.push(this.$el.append("<i class='fa fa-star-o'></i>"));
       }
       return _results;
     };
@@ -58,20 +60,19 @@ var __slice = [].slice;
 
     Starrr.prototype.syncRating = function(rating) {
       var i, _i, _j, _ref;
-
       rating || (rating = this.options.rating);
       if (rating) {
         for (i = _i = 0, _ref = rating - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-          this.$el.find('i').eq(i).removeClass('icon-star-empty').addClass('icon-star');
+          this.$el.find('i').eq(i).removeClass('fa-star-o').addClass('fa-star');
         }
       }
       if (rating && rating < 5) {
         for (i = _j = rating; rating <= 4 ? _j <= 4 : _j >= 4; i = rating <= 4 ? ++_j : --_j) {
-          this.$el.find('i').eq(i).removeClass('icon-star').addClass('icon-star-empty');
+          this.$el.find('i').eq(i).removeClass('fa-star').addClass('fa-star-o');
         }
       }
       if (!rating) {
-        return this.$el.find('i').removeClass('icon-star').addClass('icon-star-empty');
+        return this.$el.find('i').removeClass('fa-star').addClass('fa-star-o');
       }
     };
 
@@ -81,11 +82,9 @@ var __slice = [].slice;
   return $.fn.extend({
     starrr: function() {
       var args, option;
-
       option = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
       return this.each(function() {
         var data;
-
         data = $(this).data('star-rating');
         if (!data) {
           $(this).data('star-rating', (data = new Starrr($(this), option)));

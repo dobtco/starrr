@@ -34,10 +34,9 @@
       @$el.append("""<i class='#{@options.emptyStarClass}'></i>""") for [1..@options.numStars]
 
     setRating: (rating) ->
-      rating = undefined if @options.rating == rating
-      @options.rating = rating
+      @options.rating = if @options.rating == rating then undefined else rating
       @syncRating()
-      @$el.trigger('starrr:change', rating)
+      @$el.trigger('starrr:change', @options.rating)
 
     syncRating: (rating) ->
       rating ||= @options.rating

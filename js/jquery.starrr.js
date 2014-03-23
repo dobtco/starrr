@@ -52,12 +52,9 @@ var __slice = [].slice;
     };
 
     Starrr.prototype.setRating = function(rating) {
-      if (this.options.rating === rating) {
-        rating = void 0;
-      }
-      this.options.rating = rating;
+      this.options.rating = this.options.rating === rating ? void 0 : rating;
       this.syncRating();
-      return this.$el.trigger('starrr:change', rating);
+      return this.$el.trigger('starrr:change', this.options.rating);
     };
 
     Starrr.prototype.syncRating = function(rating) {

@@ -3,6 +3,5 @@
   .starrr i {
     font-size: 16px;
     padding: 0 1px;
-    cursor: pointer; }
-    .starrr i.fa-star-o, .starrr i.fa-star {
-      color: #FFD119; }
+    cursor: pointer;
+    color: #FFD119; }

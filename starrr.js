@@ -2,7 +2,7 @@ var __slice = [].slice;
 
 (function($, window) {
   var Starrr;
-  Starrr = (function() {
+  window.Starrr = Starrr = (function() {
     Starrr.prototype.defaults = {
       rating: void 0,
       emptyStarClass: 'fa fa-star-o',

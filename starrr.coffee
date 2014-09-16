@@ -1,7 +1,7 @@
 (($, window) ->
 
   # Define the plugin class
-  class Starrr
+  window.Starrr = class Starrr
     defaults:
       rating: undefined
       emptyStarClass: 'fa fa-star-o'

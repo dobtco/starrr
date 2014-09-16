@@ -18,10 +18,11 @@ var __slice = [].slice;
       _ref = this.defaults;
       for (i in _ref) {
         _ = _ref[i];
-        if (this.$el.data(i) != null) {
-          this.options[i] = this.$el.data(i);
+        if (this.$el.data(i.toLowerCase()) != null) {
+          this.options[i] = this.$el.data(i.toLowerCase());
         }
       }
+      console.log(this.options);
       this.createStars();
       this.syncRating();
       this.$el.on('mouseover.starrr', 'i', (function(_this) {
@@ -58,15 +59,15 @@ var __slice = [].slice;
     };
 
     Starrr.prototype.syncRating = function(rating) {
-      var i, _i, _j, _ref;
+      var i, _i, _j, _ref, _ref1;
       rating || (rating = this.options.rating);
       if (rating) {
         for (i = _i = 0, _ref = rating - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
           this.$el.find('i').eq(i).removeClass(this.options.emptyStarClass).addClass(this.options.fullStarClass);
         }
       }
-      if (rating && rating < 5) {
-        for (i = _j = rating; rating <= 4 ? _j <= 4 : _j >= 4; i = rating <= 4 ? ++_j : --_j) {
+      if (rating && rating < this.options.numStars) {
+        for (i = _j = rating, _ref1 = this.options.numStars - 1; rating <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = rating <= _ref1 ? ++_j : --_j) {
           this.$el.find('i').eq(i).removeClass(this.options.fullStarClass).addClass(this.options.emptyStarClass);
         }
       }

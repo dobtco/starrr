@@ -14,7 +14,9 @@
       @$el = $el
 
       for i, _ of @defaults
-        @options[i] = @$el.data(i) if @$el.data(i)?
+        @options[i] = @$el.data(i.toLowerCase()) if @$el.data(i.toLowerCase())?
+
+      console.log @options
 
       @createStars()
       @syncRating()
@@ -45,8 +47,8 @@
         for i in [0..rating - 1]
           @$el.find('i').eq(i).removeClass(@options.emptyStarClass).addClass(@options.fullStarClass)
 
-      if rating && rating < 5
-        for i in [rating..4]
+      if rating && rating < @options.numStars
+        for i in [rating..(@options.numStars - 1)]
           @$el.find('i').eq(i).removeClass(@options.fullStarClass).addClass(@options.emptyStarClass)
 
       if !rating

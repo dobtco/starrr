@@ -36,6 +36,11 @@
       </span>
     </div>
 
+    <h5>Advanced:</h5>
+    <div class='starrr' data-numstars='10' data-connected-input='rating'></div>
+    <br />
+    <input type='text' name='rating' value='3' />
+
     <h5>Why?</h5>
     <p>Because it shouldn't take <a href='https://github.com/wbotelhos/raty/blob/master/lib/jquery.raty.js'>hundreds</a> <a href='http://www.fyneworks.com/jquery/star-rating/'>of</a> <a href='http://rateit.codeplex.com/SourceControl/latest#src/jquery.rateit.js'>lines</a> of javascript to do this shit.</p> You can understand the entirety of Starrr's source code in about a minute, not to mention it's less than 2kb minified.
 
@@ -47,7 +52,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
   <script src="starrr.min.js"></script>
   <script>
-    $('.starrr').on('starrr:change', function(e, value){
+    $('.starrr:eq(0)').on('starrr:change', function(e, value){
       if (value) {
         $('.your-choice-was').show();
         $('.choice').text(value);

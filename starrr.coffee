@@ -4,9 +4,9 @@
   window.Starrr = class Starrr
     defaults:
       rating: undefined
+      numStars: 5
       emptyStarClass: 'fa fa-star-o'
       fullStarClass: 'fa fa-star'
-      numStars: 5
       change: (e, value) ->
 
     constructor: ($el, options) ->
@@ -16,49 +16,67 @@
       for i, _ of @defaults
         @options[i] = @$el.data(i.toLowerCase()) if @$el.data(i.toLowerCase())?
 
+      if @$el.data('connected-input')
+        @$connectedInput = $("[name=\"#{@$el.data('connected-input')}\"]")
+        @options.rating = if @$connectedInput.val() then parseInt(@$connectedInput.val(), 10) else undefined
+
       @createStars()
       @syncRating()
 
+      return if @$connectedInput && @$connectedInput.is(':disabled')
+
       @$el.on 'mouseover.starrr', 'i', (e) =>
-        @syncRating(@$el.find('i').index(e.currentTarget) + 1)
+        @syncRating(@getStars().index(e.currentTarget) + 1)
 
       @$el.on 'mouseout.starrr', =>
         @syncRating()
 
       @$el.on 'click.starrr', 'i', (e) =>
-        @setRating(@$el.find('i').index(e.currentTarget) + 1)
+        @setRating(@getStars().index(e.currentTarget) + 1)
 
       @$el.on 'starrr:change', @options.change
+
+      if @$connectedInput?
+        @$el.on 'starrr:change', (e, value) =>
+          @$connectedInput.val(value)
+          @$connectedInput.trigger('focusout') # trigger change
+
+    getStars: ->
+      @$el.find('i')
 
     createStars: ->
       @$el.append("""<i class='#{@options.emptyStarClass}'></i>""") for [1..@options.numStars]
 
     setRating: (rating) ->
-      @options.rating = if @options.rating == rating then undefined else rating
+      rating = undefined if @options.rating == rating
+      @options.rating = rating
       @syncRating()
-      @$el.trigger('starrr:change', @options.rating)
+      @$el.trigger('starrr:change', rating)
+
+    getRating: ->
+      @options.rating
 
     syncRating: (rating) ->
       rating ||= @options.rating
 
       if rating
         for i in [0..rating - 1]
-          @$el.find('i').eq(i).removeClass(@options.emptyStarClass).addClass(@options.fullStarClass)
+          @getStars().eq(i).removeClass(@options.emptyStarClass).addClass(@options.fullStarClass)
 
       if rating && rating < @options.numStars
         for i in [rating..(@options.numStars - 1)]
-          @$el.find('i').eq(i).removeClass(@options.fullStarClass).addClass(@options.emptyStarClass)
+          @getStars().eq(i).removeClass(@options.fullStarClass).addClass(@options.emptyStarClass)
 
       if !rating
-        @$el.find('i').removeClass(@options.fullStarClass).addClass(@options.emptyStarClass)
+        @getStars().removeClass(@options.fullStarClass).addClass(@options.emptyStarClass)
 
   # Define the plugin
   $.fn.extend starrr: (option, args...) ->
     @each ->
-      data = $(@).data('star-rating')
+      data = $(@).data('starrr')
 
       if !data
-        $(@).data 'star-rating', (data = new Starrr($(@), option))
+        $(@).data 'starrr', (data = new Starrr($(@), option))
       if typeof option == 'string'
         data[option].apply(data, args)
 

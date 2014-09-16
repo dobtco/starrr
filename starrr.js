@@ -5,9 +5,9 @@ var __slice = [].slice;
   window.Starrr = Starrr = (function() {
     Starrr.prototype.defaults = {
       rating: void 0,
+      numStars: 5,
       emptyStarClass: 'fa fa-star-o',
       fullStarClass: 'fa fa-star',
-      numStars: 5,
       change: function(e, value) {}
     };
 
@@ -22,11 +22,18 @@ var __slice = [].slice;
           this.options[i] = this.$el.data(i.toLowerCase());
         }
       }
+      if (this.$el.data('connected-input')) {
+        this.$connectedInput = $("[name=\"" + (this.$el.data('connected-input')) + "\"]");
+        this.options.rating = this.$connectedInput.val() ? parseInt(this.$connectedInput.val(), 10) : void 0;
+      }
       this.createStars();
       this.syncRating();
+      if (this.$connectedInput && this.$connectedInput.is(':disabled')) {
+        return;
+      }
       this.$el.on('mouseover.starrr', 'i', (function(_this) {
         return function(e) {
-          return _this.syncRating(_this.$el.find('i').index(e.currentTarget) + 1);
+          return _this.syncRating(_this.getStars().index(e.currentTarget) + 1);
         };
       })(this));
       this.$el.on('mouseout.starrr', (function(_this) {
@@ -36,11 +43,23 @@ var __slice = [].slice;
       })(this));
       this.$el.on('click.starrr', 'i', (function(_this) {
         return function(e) {
-          return _this.setRating(_this.$el.find('i').index(e.currentTarget) + 1);
+          return _this.setRating(_this.getStars().index(e.currentTarget) + 1);
         };
       })(this));
       this.$el.on('starrr:change', this.options.change);
+      if (this.$connectedInput != null) {
+        this.$el.on('starrr:change', (function(_this) {
+          return function(e, value) {
+            _this.$connectedInput.val(value);
+            return _this.$connectedInput.trigger('focusout');
+          };
+        })(this));
+      }
     }
+
+    Starrr.prototype.getStars = function() {
+      return this.$el.find('i');
+    };
 
     Starrr.prototype.createStars = function() {
       var _i, _ref, _results;
@@ -52,9 +71,16 @@ var __slice = [].slice;
     };
 
     Starrr.prototype.setRating = function(rating) {
-      this.options.rating = this.options.rating === rating ? void 0 : rating;
+      if (this.options.rating === rating) {
+        rating = void 0;
+      }
+      this.options.rating = rating;
       this.syncRating();
-      return this.$el.trigger('starrr:change', this.options.rating);
+      return this.$el.trigger('starrr:change', rating);
+    };
+
+    Starrr.prototype.getRating = function() {
+      return this.options.rating;
     };
 
     Starrr.prototype.syncRating = function(rating) {
@@ -62,16 +88,16 @@ var __slice = [].slice;
       rating || (rating = this.options.rating);
       if (rating) {
         for (i = _i = 0, _ref = rating - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-          this.$el.find('i').eq(i).removeClass(this.options.emptyStarClass).addClass(this.options.fullStarClass);
+          this.getStars().eq(i).removeClass(this.options.emptyStarClass).addClass(this.options.fullStarClass);
         }
       }
       if (rating && rating < this.options.numStars) {
         for (i = _j = rating, _ref1 = this.options.numStars - 1; rating <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = rating <= _ref1 ? ++_j : --_j) {
-          this.$el.find('i').eq(i).removeClass(this.options.fullStarClass).addClass(this.options.emptyStarClass);
+          this.getStars().eq(i).removeClass(this.options.fullStarClass).addClass(this.options.emptyStarClass);
         }
       }
       if (!rating) {
-        return this.$el.find('i').removeClass(this.options.fullStarClass).addClass(this.options.emptyStarClass);
+        return this.getStars().removeClass(this.options.fullStarClass).addClass(this.options.emptyStarClass);
       }
     };
 
@@ -84,9 +110,9 @@ var __slice = [].slice;
       option = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
       return this.each(function() {
         var data;
-        data = $(this).data('star-rating');
+        data = $(this).data('starrr');
         if (!data) {
-          $(this).data('star-rating', (data = new Starrr($(this), option)));
+          $(this).data('starrr', (data = new Starrr($(this), option)));
         }
         if (typeof option === 'string') {
           return data[option].apply(data, args);

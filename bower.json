@@ -1,0 +1,17 @@
+{
+  "name": "starrr",
+  "version": "0.0.1",
+  "authors": [
+    "ajb <adam@dobt.co>"
+  ],
+  "description": "1-5 star rating with jQuery.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "main": ["starrr.coffee", "starrr.scss"],
+  "dependencies": {
+  }
+}

@@ -22,7 +22,6 @@ var __slice = [].slice;
           this.options[i] = this.$el.data(i.toLowerCase());
         }
       }
-      console.log(this.options);
       this.createStars();
       this.syncRating();
       this.$el.on('mouseover.starrr', 'i', (function(_this) {

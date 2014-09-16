@@ -16,8 +16,6 @@
       for i, _ of @defaults
         @options[i] = @$el.data(i.toLowerCase()) if @$el.data(i.toLowerCase())?
 
-      console.log @options
-
       @createStars()
       @syncRating()
 

@@ -1,6 +1,6 @@
 {
   "name": "starrr",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "authors": [
     "ajb <adam@dobt.co>"
   ],
@@ -11,7 +11,9 @@
     "node_modules",
     "bower_components"
   ],
-  "main": ["starrr.coffee", "starrr.scss"],
-  "dependencies": {
-  }
+  "main": [
+    "starrr.coffee",
+    "starrr.scss"
+  ],
+  "dependencies": {}
 }

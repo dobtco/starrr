@@ -1,5 +1,6 @@
 .starrr {
-  display: inline-block; }
+  display: inline-block;
+  white-space: nowrap; }
   .starrr i {
     font-size: 16px;
     padding: 0 1px;

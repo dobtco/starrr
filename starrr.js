@@ -8,6 +8,7 @@ var __slice = [].slice;
       numStars: 5,
       emptyStarClass: 'fa fa-star-o',
       fullStarClass: 'fa fa-star',
+      defaultHints: 'Terrible,Poor,Average,Very Good,Exellent',
       change: function(e, value) {}
     };
 
@@ -60,6 +61,10 @@ var __slice = [].slice;
     Starrr.prototype.getStars = function() {
       return this.$el.find('i');
     };
+    
+    Starrr.prototype.getHint = function() {
+      return this.$el.find('span');
+    };
 
     Starrr.prototype.createStars = function() {
       var _i, _ref, _results;
@@ -67,6 +72,7 @@ var __slice = [].slice;
       for (_i = 1, _ref = this.options.numStars; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--) {
         _results.push(this.$el.append("<i class='" + this.options.emptyStarClass + "'></i>"));
       }
+      _results.push(this.$el.append('<span class="rating-helper"></span>'));
       return _results;
     };
 
@@ -81,6 +87,15 @@ var __slice = [].slice;
 
     Starrr.prototype.getRating = function() {
       return this.options.rating;
+    };
+    
+    Starrr.prototype.syncHints = function(rating){
+      var hints = this.options.defaultHints.split(",");
+      if(this.$el.attr("data-hints")
+            && this.$el.attr("data-hints").split(",").length === this.options.numStars){
+          hints = this.$el.attr("data-hints").split(",");
+      }
+      this.getHint().text(hints[rating-1]);
     };
 
     Starrr.prototype.syncRating = function(rating) {
@@ -99,6 +114,7 @@ var __slice = [].slice;
       if (!rating) {
         return this.getStars().removeClass(this.options.fullStarClass).addClass(this.options.emptyStarClass);
       }
+      this.syncHints(rating);
     };
 
     return Starrr;

@@ -48,17 +48,17 @@ $('.starrr').starrr({
 ```js
 $('.starrr').starrr({
   change: function(e, value){
-    alert('new rating is ' + value);
+    alert('new rating is ' + value)
   }
-);
+})
 ```
 
 Or if you prefer events:
 
 ```js
 $('.starrr').on('starrr:change', function(e, value){
-  alert('new rating is ' + value);
-});
+  alert('new rating is ' + value)
+})
 ```
 
 ## Developing

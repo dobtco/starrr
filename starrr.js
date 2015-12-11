@@ -27,7 +27,7 @@ var __slice = [].slice;
         this.options.rating = this.$connectedInput.val() ? parseInt(this.$connectedInput.val(), 10) : void 0;
       }
       this.createStars();
-      this.syncRating();
+      this._syncRating();
       if (this.$connectedInput && this.$connectedInput.is(':disabled')) {
         return;
       }
@@ -84,6 +84,15 @@ var __slice = [].slice;
     };
 
     Starrr.prototype.syncRating = function(rating) {
+	 	if(this.$el.data('disabled')){
+	 		   return Starrr;
+	 	}
+
+	 	return this._syncRating(rating);
+ 	};
+
+    Starrr.prototype._syncRating = function(rating) {
+    
       var i, _i, _j, _ref, _ref1;
       rating || (rating = this.options.rating);
       if (rating) {
@@ -122,6 +131,6 @@ var __slice = [].slice;
   });
 })(window.jQuery, window);
 
-$(function() {
-  return $(".starrr").starrr();
+jQuery(function() {
+  return jQuery(".starrr").starrr();
 });

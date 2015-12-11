@@ -23,7 +23,7 @@
       @createStars()
       @syncRating()
 
-      return if @$connectedInput && @$connectedInput.is(':disabled')
+      return if @$connectedInput && @$connectedInput.is(':disabled') || @$el.data('disabled')
 
       @$el.on 'mouseover.starrr', 'i', (e) =>
         @syncRating(@getStars().index(e.currentTarget) + 1)
@@ -81,6 +81,3 @@
         data[option].apply(data, args)
 
 ) window.jQuery, window
-
-$ ->
-  $(".starrr").starrr()

@@ -122,6 +122,6 @@ var __slice = [].slice;
   });
 })(window.jQuery, window);
 
-$(function() {
-  return $(".starrr").starrr();
+jQuery(function() {
+  return jQuery(".starrr").starrr();
 });

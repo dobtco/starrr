@@ -61,6 +61,42 @@ $('.starrr').on('starrr:change', function(e, value){
 })
 ```
 
+
+## Working with multiple enable/disable stars
+
+Readonly Stars
+
+```html
+<div class="starrr" data-rating="1"  data-disabled="true"></div>
+<div class="starrr" data-rating="3"  data-disabled="true"></div>
+<div class="starrr" data-rating="5"  data-disabled="true"></div>
+```
+
+Form input
+
+```htm
+<input type='text' id="rating" name="rating" />
+<div class="starrr" data-inputId="#rating"></div>
+```
+
+
+
+```js
+
+jQuery('.starrr').each(function(){
+  jQuery(this).starrr({
+    rating: parseInt(jQuery(this).data('rating'), 10),
+    readOnly: jQuery(this).data('disabled')
+  });
+})
+
+jQuery('.starrr').on('starrr:change', function(e, value){
+  //alert('new rating is ' + value)
+  id = jQuery(e.delegateTarget).data('inputId')
+  jQuery(id).val(value);
+});
+```
+
 ## Developing
 
 - `npm install`

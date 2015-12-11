@@ -82,5 +82,5 @@
 
 ) window.jQuery, window
 
-$ ->
-  $(".starrr").starrr()
+jQuery ->
+  jQuery(".starrr").starrr()

@@ -21,7 +21,7 @@
         @options.rating = if @$connectedInput.val() then parseInt(@$connectedInput.val(), 10) else undefined
 
       @createStars()
-      @syncRating()
+      @_syncRating()
 
       return if @$connectedInput && @$connectedInput.is(':disabled')
 
@@ -57,6 +57,12 @@
       @options.rating
 
     syncRating: (rating) ->
+       if @$el.data('starrr')
+         return Starrr
+
+       return @_syncRating(rating)
+
+    _syncRating: (rating) ->
       rating ||= @options.rating
 
       if rating
@@ -82,5 +88,5 @@
 
 ) window.jQuery, window
 
-$ ->
-  $(".starrr").starrr()
+jQuery ->
+  jQuery(".starrr").starrr()

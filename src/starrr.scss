@@ -3,10 +3,11 @@ $starrrColor: #FFD119 !default;
 .starrr {
   display: inline-block;
 
-  i {
+  a {
     font-size: 16px;
     padding: 0 1px;
     cursor: pointer;
     color: $starrrColor;
+    text-decoration: none;
   }
 }

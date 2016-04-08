@@ -1,6 +1,6 @@
 {
   "name": "starrr",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "Gruntfile.coffee",
   "author": "ajb <adam@dobt.co>",
   "license": "MIT",

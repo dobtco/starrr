@@ -17,22 +17,22 @@
 
       return if @options.readOnly
 
-      @$el.on 'mouseover.starrr', 'i', (e) =>
+      @$el.on 'mouseover.starrr', 'a', (e) =>
         @syncRating(@getStars().index(e.currentTarget) + 1)
 
       @$el.on 'mouseout.starrr', =>
         @syncRating()
 
-      @$el.on 'click.starrr', 'i', (e) =>
+      @$el.on 'click.starrr', 'a', (e) =>
         @setRating(@getStars().index(e.currentTarget) + 1)
 
       @$el.on 'starrr:change', @options.change
 
     getStars: ->
-      @$el.find('i')
+      @$el.find('a')
 
     createStars: ->
-      @$el.append('<i />') for [1..@options.max]
+      @$el.append("<a href='#' />") for [1..@options.max]
 
     setRating: (rating) ->
       rating = undefined if @options.rating == rating

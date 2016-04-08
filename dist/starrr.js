@@ -20,7 +20,7 @@ var slice = [].slice;
       if (this.options.readOnly) {
         return;
       }
-      this.$el.on('mouseover.starrr', 'i', (function(_this) {
+      this.$el.on('mouseover.starrr', 'a', (function(_this) {
         return function(e) {
           return _this.syncRating(_this.getStars().index(e.currentTarget) + 1);
         };
@@ -30,7 +30,7 @@ var slice = [].slice;
           return _this.syncRating();
         };
       })(this));
-      this.$el.on('click.starrr', 'i', (function(_this) {
+      this.$el.on('click.starrr', 'a', (function(_this) {
         return function(e) {
           return _this.setRating(_this.getStars().index(e.currentTarget) + 1);
         };
@@ -39,14 +39,14 @@ var slice = [].slice;
     }
 
     Starrr.prototype.getStars = function() {
-      return this.$el.find('i');
+      return this.$el.find('a');
     };
 
     Starrr.prototype.createStars = function() {
       var j, ref, results;
       results = [];
       for (j = 1, ref = this.options.max; 1 <= ref ? j <= ref : j >= ref; 1 <= ref ? j++ : j--) {
-        results.push(this.$el.append('<i />'));
+        results.push(this.$el.append("<a href='#' />"));
       }
       return results;
     };

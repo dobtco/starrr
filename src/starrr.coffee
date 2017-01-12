@@ -5,8 +5,8 @@
       rating: undefined
       max: 5
       readOnly: false
-      emptyClass: 'fa fa-star-o'
-      fullClass: 'fa fa-star'
+      emptyClass: 'glyphicon glyphicon-star-empty'
+      fullClass: 'glyphicon glyphicon-star'
       change: (e, value) ->
 
     constructor: ($el, options) ->

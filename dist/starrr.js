@@ -7,8 +7,8 @@ var slice = [].slice;
       rating: void 0,
       max: 5,
       readOnly: false,
-      emptyClass: 'fa fa-star-o fa-2x',
-      fullClass: 'fa fa-star fa-2x',
+      emptyClass: 'fa fa-star-o',
+      fullClass: 'fa fa-star',
       change: function(e, value) {}
     };
 
@@ -26,23 +26,23 @@ var slice = [].slice;
       if (this.options.readOnly) {
         return;
       }
-      this.$el.on('mouseover.starrr', '.rating a, a', (function(_this) {
+      this.$el.on('mouseover.starrr', 'a', (function(_this) {
         return function(e) {
           return _this.syncRating(_this.getStars().index(e.currentTarget) + 1);
         };
       })(this));
-      this.$el.on('mouseout.starrr', '.rating a', (function(_this) {
+      this.$el.on('mouseout.starrr', (function(_this) {
         return function() {
           return _this.syncRating();
         };
       })(this));
-      this.$el.on('click.starrr', '.rating, a', (function(_this) {
+      this.$el.on('click.starrr', 'a', (function(_this) {
         return function(e) {
           e.preventDefault();
           return _this.setRating(_this.getStars().index(e.currentTarget) + 1);
         };
       })(this));
-      this.$el.on('starrr:change', '.rating', this.options.change);
+      this.$el.on('starrr:change', this.options.change);
     }
 
     Starrr.prototype.getStars = function() {

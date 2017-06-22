@@ -7,8 +7,8 @@ var slice = [].slice;
       rating: void 0,
       max: 5,
       readOnly: false,
-      emptyClass: 'fa fa-star-o',
-      fullClass: 'fa fa-star',
+      emptyClass: 'fa fa-star-o fa-2x',
+      fullClass: 'fa fa-star fa-2x',
       change: function(e, value) {}
     };
 
@@ -24,25 +24,26 @@ var slice = [].slice;
       this.syncRating(attrRating)
 
       if (this.options.readOnly) {
+        $(this)[0].$el.children().addClass('readonly')
         return;
       }
-      this.$el.on('mouseover.starrr', 'a', (function(_this) {
+      this.$el.on('mouseover.starrr', '.rating a, a', (function(_this) {
         return function(e) {
           return _this.syncRating(_this.getStars().index(e.currentTarget) + 1);
         };
       })(this));
-      this.$el.on('mouseout.starrr', (function(_this) {
+      this.$el.on('mouseout.starrr', '.rating a', (function(_this) {
         return function() {
           return _this.syncRating();
         };
       })(this));
-      this.$el.on('click.starrr', 'a', (function(_this) {
+      this.$el.on('click.starrr', '.rating, a', (function(_this) {
         return function(e) {
           e.preventDefault();
           return _this.setRating(_this.getStars().index(e.currentTarget) + 1);
         };
       })(this));
-      this.$el.on('starrr:change', this.options.change);
+      this.$el.on('starrr:change', '.rating', this.options.change);
     }
 
     Starrr.prototype.getStars = function() {

@@ -10,7 +10,7 @@
 	text-decoration: none; 
 }
 
-.readonly {
-	cursor: not-allowed !important;
+.readonly .fa {
+	cursor: default !important;
 	color: #ffe373 !important;
 }

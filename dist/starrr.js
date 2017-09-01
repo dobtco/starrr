@@ -17,7 +17,14 @@ var slice = [].slice;
       this.$el = $el;
       this.createStars();
       this.syncRating();
+      
+      var attrRating = parseInt($(this)[0].$el.attr('starrr-rating'));
+
+      if (typeof(attrRating) == 'number')
+      this.syncRating(attrRating)
+
       if (this.options.readOnly) {
+        $(this)[0].$el.children().addClass('readonly')
         return;
       }
       this.$el.on('mouseover.starrr', 'a', (function(_this) {
@@ -53,9 +60,6 @@ var slice = [].slice;
     };
 
     Starrr.prototype.setRating = function(rating) {
-      if (this.options.rating === rating) {
-        rating = void 0;
-      }
       this.options.rating = rating;
       this.syncRating();
       return this.$el.trigger('starrr:change', rating);

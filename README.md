@@ -19,6 +19,15 @@ starrr
 $('.starrr').starrr()
 ```
 
+### Set rating on the fly
+```html
+<div class="starrr" starrr-rating="3"></div>
+```
+
+```js
+$('.starrr').starrr()
+```
+
 ### With an existing rating
 
 ```js

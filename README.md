@@ -19,7 +19,7 @@ starrr
 $('.starrr').starrr()
 ```
 
-### Set stars on the fly
+### Set rating on the fly
 ```html
 <div class="starrr" starrr-rating="3"></div>
 ```

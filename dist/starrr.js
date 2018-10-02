@@ -85,6 +85,10 @@ var slice = [].slice;
       option = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
       return this.each(function() {
         var data;
+        
+        //  NOW YOU CAN USE data-rating="n" as a default value;
+        option.rating = $(this).attr("data-rating");
+        
         data = $(this).data('starrr');
         if (!data) {
           $(this).data('starrr', (data = new Starrr($(this), option)));
